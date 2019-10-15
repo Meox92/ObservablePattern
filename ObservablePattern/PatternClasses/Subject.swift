@@ -23,11 +23,18 @@ class WeatherData: Subject {
   }
   
   func removeObserver(o: Observer) {
+//    if let index = observers.firstIndex(of: o) {
+//        observers.remove(at: index)
+//    }
+    guard let index = self.observers.firstIndex(where: { $0.id == o.id }) else {
+         return
+     }
+     self.observers.remove(at: index)
   }
   
   func notifyObserver() {
     for o in observers {
-      o.update(humidity: humidity, temp: temperature)
+      o.updateData(humidity: humidity, temp: temperature)
     }
   }
   

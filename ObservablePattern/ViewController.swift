@@ -16,12 +16,18 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view.
     
     let weatherData = WeatherData()
-    let tempDisplay = TemperatureDisplay(subject: weatherData)
-    let temp2Dispay = Temperature2Display(subject: weatherData)
+    let _ = DataDisplayer1(subject: weatherData)
+    let d2 = DataDisplayer2(subject: weatherData)
     
     weatherData.setMeasurament(humidity: 10, temp: 15)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-      weatherData.setMeasurament(humidity: 5, temp: 5)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      weatherData.setMeasurament(humidity: 9, temp: 7)
+      weatherData.removeObserver(o: d2)
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+      weatherData.setMeasurament(humidity: 32, temp: 14)
     }
     
   }
